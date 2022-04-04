@@ -1,0 +1,21 @@
+{
+    "lists": [
+        {   
+            "tripUuid": "498f67a8-ebc5-qq2eq2",
+            "listUuid": "1231231239102381",
+            "name": "Food to eat",
+            "places": [
+                {
+                    "placeId": "123123123123",
+                    "description": "burgers",
+                    "date": "13 Apr 2022"
+                },
+                {
+                    "placeId": "987897987",
+                    "description": "some description about a place",
+                    "date": "14 Apr 2022"
+                }
+            ]
+        }
+    ]
+}

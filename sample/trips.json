@@ -1,0 +1,19 @@
+{
+    "trips": [
+        {
+            "ownerUuid": "498f67a8-ebc5-5299-aa33-7c358b9c60e8",
+            "tripUuid": "498f67a8-ebc5-1235-bb96-7c358b9c60e8",
+            "name": "Trip for fun",
+            "city": "Sydney",
+            "startDate": "13 Apr 2022",
+            "endDate": "25 Apr 2022"
+        },
+        {
+            "ownerUuid": "498f67a8-ebc5-5299-aa33-7c358b9c60e8",
+            "tripUuid": "498f67a8-e123-5299-aa33-7c358b9c60e8",
+            "city": "Sydney",
+            "startDate": "13 Apr 2022",
+            "endDate": "25 Apr 2022"
+        }
+    ]
+}
