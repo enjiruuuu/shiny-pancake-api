@@ -2,5 +2,15 @@
     "region_name": "ap-southeast-1",
     "urls": {
         "base": "http://127.0.0.1:5000/"
+    },
+    "responses": {
+        "statusCodes": {
+            "notFound": 404,
+            "success": 200
+        },
+        "login": {
+            "invalid": "Invalid email or password",
+            "success": "Login Success"
+        }
     }
 }

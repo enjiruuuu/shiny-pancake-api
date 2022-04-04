@@ -1,17 +1,27 @@
-from flask import Flask, request, jsonify
+import json
+from flask import Flask
 from classes.users import UsersApi 
 
 # setup
 app = Flask(__name__)
+with open('api-config.json', 'r') as f:
+    config = json.load(f)
 
+responses = config['responses']
+statusCodes = responses['statusCodes']
 
-# users
-@app.route('/users', methods=["GET"])
-def getUsers():
-    input_json = request.get_json(force=True) 
-    queryEmail = input_json['email']
+# login
+@app.route('/login', methods=["GET"])
+def login():
+    checkLogin = UsersApi().login()
+    
+    if checkLogin:
+        return {
+            "HTTPStatusCode": statusCodes['success'],
+            "Message": responses['login']['success']
+        }
 
-    usersApi = UsersApi()
-    response = usersApi.get(queryEmail)
-
-    return jsonify(response)
+    return {
+        "HTTPStatusCode": statusCodes['notFound'],
+        "Message": responses['login']['invalid']
+    }
