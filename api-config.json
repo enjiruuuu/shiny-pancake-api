@@ -6,11 +6,19 @@
     "responses": {
         "statusCodes": {
             "notFound": 404,
-            "success": 200
+            "success": 200,
+            "serverError": 500
         },
         "login": {
             "invalid": "Invalid email or password",
             "success": "Login Success"
+        },
+        "trips": {
+            "addedSuccess": "New trip successfully added",
+            "addedMissingKey": "Missing mandatory key"
+        },
+        "generic": {
+            "serverError": "Something went wrong"
         }
     }
 }
