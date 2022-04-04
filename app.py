@@ -14,14 +14,4 @@ statusCodes = responses['statusCodes']
 @app.route('/login', methods=["GET"])
 def login():
     checkLogin = UsersApi().login()
-    
-    if checkLogin:
-        return {
-            "HTTPStatusCode": statusCodes['success'],
-            "Message": responses['login']['success']
-        }
-
-    return {
-        "HTTPStatusCode": statusCodes['notFound'],
-        "Message": responses['login']['invalid']
-    }
+    return checkLogin

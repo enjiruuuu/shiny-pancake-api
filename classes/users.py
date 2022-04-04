@@ -1,8 +1,8 @@
-import hashlib
-import uuid
+import uuid, hashlib, json
 from flask import request
 from datetime import datetime
 from classes.dynamodb import DynamodbAPI
+from classes.apiConfig import ApiConfig
 from boto3.dynamodb.conditions import Key
 
 class UsersApi:
@@ -11,6 +11,8 @@ class UsersApi:
 
         dynamodbInstance = DynamodbAPI()
         self.table = dynamodbInstance.dynamodb.Table(self.tableName)
+
+        self.apiConfigInstance = ApiConfig()
     
     def __get(self, email):
         response = self.table.query(
@@ -29,17 +31,29 @@ class UsersApi:
         print(generatedUuid)
         return generatedUuid
 
-    def login(self) -> bool:
+    def login(self) -> json:
         input_json = request.get_json()
         queryEmail = input_json['email']
-        queryPassword = input_json['password']
+        queryPassword = input_json['password'] 
 
         checkUserExists = self.__get(queryEmail)
 
         if len(checkUserExists['Items']) > 0:
-            dbPassword = checkUserExists['Items'][0]['password']
+            queryResponse = checkUserExists['Items'][0]
+            dbPassword = queryResponse['password']
             checkPassword = self.__checkPassword(queryPassword, dbPassword)
             if checkPassword: 
-                return True
+                return {
+                    "HTTPStatusCode": self.apiConfigInstance.statusCodes['success'],
+                    "Message": self.apiConfigInstance.responses['login']['success'],
+                    "data": {
+                        "activated": queryResponse['activated'],
+                        "name": queryResponse['name'],
+                        "uuid": queryResponse['uuid'],
+                    }
+                }
         
-        return False
+        return {
+            "HTTPStatusCode": self.apiConfigInstance.statusCodes['notFound'],
+            "Message": self.apiConfigInstance.responses['login']['invalid']
+        }
