@@ -14,11 +14,16 @@ statusCodes = responses['statusCodes']
 usersApiInstance = UsersApi()
 tripsApiInstance = TripsApi()
 
-# login
+# login / users
 @app.route('/login', methods=["GET"])
 def login():
     checkLogin = usersApiInstance.login()
     return checkLogin
+
+@app.route('/users/create', methods=["PUT"])
+def createUser():
+    createUser = usersApiInstance.createUser()
+    return createUser
 
 # trips
 @app.route('/users/<ownerUuid>/trips', methods=["GET"])

@@ -41,5 +41,5 @@ class TripsApi:
         
         return {
                 "HTTPStatusCode": self.apiConfigInstance.statusCodes['serverError'],
-                "Message": self.apiConfigInstance.responses['trips']['addedMissingKey']
+                "Message": self.apiConfigInstance.responses['generic']['missingKey']
         }

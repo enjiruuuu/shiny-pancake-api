@@ -7,18 +7,23 @@
         "statusCodes": {
             "notFound": 404,
             "success": 200,
-            "serverError": 500
+            "serverError": 500,
+            "conflict": 409
         },
         "login": {
             "invalid": "Invalid email or password",
             "success": "Login Success"
         },
+        "users": {
+            "addedExists": "Email already exists",
+            "addedSuccess": "User successfully created"
+        },
         "trips": {
-            "addedSuccess": "New trip successfully added",
-            "addedMissingKey": "Missing mandatory key"
+            "addedSuccess": "New trip successfully added"
         },
         "generic": {
-            "serverError": "Something went wrong"
+            "serverError": "Something went wrong",
+            "missingKey": "Missing mandatory key"
         }
     }
 }
