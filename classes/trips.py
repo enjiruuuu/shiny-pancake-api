@@ -1,4 +1,3 @@
-from jinja2 import Undefined
 from classes.apiConfig import ApiConfig
 from classes.dynamodb import DynamodbAPI
 from flask import request
