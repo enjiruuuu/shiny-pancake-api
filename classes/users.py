@@ -50,8 +50,8 @@ class UsersApi:
             checkPassword = self.__checkPassword(queryPassword, dbPassword)
             if checkPassword: 
                 return {
-                    "HTTPStatusCode": self.apiConfigInstance.statusCodes['success'],
-                    "Message": self.apiConfigInstance.responses['login']['success'],
+                    "httpStatusCode": self.apiConfigInstance.statusCodes['success'],
+                    "message": self.apiConfigInstance.responses['login']['success'],
                     "data": {
                         "activated": queryResponse['activated'],
                         "name": queryResponse['name'],
@@ -60,8 +60,8 @@ class UsersApi:
                 }
         
         return {
-            "HTTPStatusCode": self.apiConfigInstance.statusCodes['notFound'],
-            "Message": self.apiConfigInstance.responses['login']['invalid']
+            "httpStatusCode": self.apiConfigInstance.statusCodes['notFound'],
+            "message": self.apiConfigInstance.responses['login']['invalid']
         }
 
     def createUser(self) -> json:
@@ -92,8 +92,8 @@ class UsersApi:
 
                     if queryResponse: 
                         return {
-                            "HTTPStatusCode": self.apiConfigInstance.statusCodes['success'],
-                            "Message": self.apiConfigInstance.responses['users']['addedSuccess'],
+                            "httpStatusCode": self.apiConfigInstance.statusCodes['success'],
+                            "message": self.apiConfigInstance.responses['users']['addedSuccess'],
                             "data": {
                                 "email": queryEmail,
                                 "name": queryName,
@@ -102,16 +102,16 @@ class UsersApi:
                         }
                     
                     return {
-                            "HTTPStatusCode": self.apiConfigInstance.statusCodes['serverError'],
-                            "Message": self.apiConfigInstance.responses['generic']['serverError']
+                            "httpStatusCode": self.apiConfigInstance.statusCodes['serverError'],
+                            "message": self.apiConfigInstance.responses['generic']['serverError']
                         }
             
             return {
-                "HTTPStatusCode": self.apiConfigInstance.statusCodes['conflict'],
-                "Message": self.apiConfigInstance.responses['users']['addedExists']
+                "httpStatusCode": self.apiConfigInstance.statusCodes['conflict'],
+                "message": self.apiConfigInstance.responses['users']['addedExists']
             }
 
         return {
-            "HTTPStatusCode": self.apiConfigInstance.statusCodes['serverError'],
-            "Message": self.apiConfigInstance.responses['generic']['missingKey']
+            "httpStatusCode": self.apiConfigInstance.statusCodes['serverError'],
+            "message": self.apiConfigInstance.responses['generic']['missingKey']
         }

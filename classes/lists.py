@@ -19,12 +19,12 @@ class ListsApi:
             )
         except ClientError as e:
             return {
-                "HTTPStatusCode": self.apiConfigInstance.statusCodes['serverError'],
-                "Message": e.response['Error']['Message']
+                "httpStatusCode": self.apiConfigInstance.statusCodes['serverError'],
+                "message": e.response['Error']['message']
             }
         else:
             return {
-                "HTTPStatusCode": self.apiConfigInstance.statusCodes['success'],
+                "httpStatusCode": self.apiConfigInstance.statusCodes['success'],
                 "data": queryResponse['Items']
             }
     
@@ -33,11 +33,11 @@ class ListsApi:
             queryResponse = self.table.get_item(Key={'tripUuid': tripUuid, 'listUuid': listUuid})
         except ClientError as e:
             return {
-                "HTTPStatusCode": self.apiConfigInstance.statusCodes['serverError'],
-                "Message": e.response['Error']['Message']
+                "httpStatusCode": self.apiConfigInstance.statusCodes['serverError'],
+                "message": e.response['Error']['message']
             }
         else:
             return {
-                "HTTPStatusCode": self.apiConfigInstance.statusCodes['success'],
+                "httpStatusCode": self.apiConfigInstance.statusCodes['success'],
                 "data": queryResponse
             }

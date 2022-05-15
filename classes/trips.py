@@ -17,7 +17,7 @@ class TripsApi:
             KeyConditionExpression=Key('ownerUuid').eq(ownerUuid)
         )
         return {
-            "HTTPStatusCode": self.apiConfigInstance.statusCodes['success'],
+            "httpStatusCode": self.apiConfigInstance.statusCodes['success'],
             "data": queryResponse['Items']
         }
     
@@ -29,16 +29,16 @@ class TripsApi:
 
             if queryResponse: 
                 return {
-                    "HTTPStatusCode": self.apiConfigInstance.statusCodes['success'],
-                    "Message": self.apiConfigInstance.responses['trips']['addedSuccess']
+                    "httpStatusCode": self.apiConfigInstance.statusCodes['success'],
+                    "message": self.apiConfigInstance.responses['trips']['addedSuccess']
                 }
             
             return {
-                    "HTTPStatusCode": self.apiConfigInstance.statusCodes['serverError'],
-                    "Message": self.apiConfigInstance.responses['generic']['serverError']
+                    "httpStatusCode": self.apiConfigInstance.statusCodes['serverError'],
+                    "message": self.apiConfigInstance.responses['generic']['serverError']
             }
         
         return {
-                "HTTPStatusCode": self.apiConfigInstance.statusCodes['serverError'],
-                "Message": self.apiConfigInstance.responses['generic']['missingKey']
+                "httpStatusCode": self.apiConfigInstance.statusCodes['serverError'],
+                "message": self.apiConfigInstance.responses['generic']['missingKey']
         }
