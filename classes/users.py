@@ -35,9 +35,12 @@ class UsersApi:
         return generatedUuid
 
     def login(self) -> json:
-        input_json = request.get_json()
-        queryEmail = input_json['email']
-        queryPassword = input_json['password'] 
+        # input_json = request.get_json()
+        # queryEmail = input_json['email']
+        # queryPassword = input_json['password']
+
+        queryEmail = request.args.get('email') 
+        queryPassword = request.args.get('password')
 
         checkUserExists = self.__get(queryEmail)
 

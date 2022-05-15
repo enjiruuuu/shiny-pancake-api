@@ -1,11 +1,13 @@
 import json
-from flask import Flask, request
+from flask import Flask, jsonify, request
+from flask_cors import CORS
 from classes.users import UsersApi 
 from classes.trips import TripsApi
 from classes.lists import ListsApi
 
 # setup
 app = Flask(__name__)
+CORS(app)
 with open('api-config.json', 'r') as f:
     config = json.load(f)
 
@@ -17,6 +19,9 @@ tripsApiInstance = TripsApi()
 listsApiInstance = ListsApi()
 
 # login / users
+# TODO: refactor to POST request for security. GET requests are sending password through params and are expected to be cached.
+# GET is just temporary solution to move on
+
 @app.route('/login', methods=["GET"])
 def login():
     checkLogin = usersApiInstance.login()
