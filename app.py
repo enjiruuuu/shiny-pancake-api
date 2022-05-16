@@ -1,6 +1,6 @@
 import json
-from flask import Flask, jsonify, request
-from flask_cors import CORS
+from flask import Flask, request
+from flask_cors import CORS, cross_origin
 from classes.users import UsersApi 
 from classes.trips import TripsApi
 from classes.lists import ListsApi
@@ -23,6 +23,7 @@ listsApiInstance = ListsApi()
 # GET is just temporary solution to move on
 
 @app.route('/login', methods=["GET"])
+@cross_origin()
 def login():
     checkLogin = usersApiInstance.login()
     return checkLogin

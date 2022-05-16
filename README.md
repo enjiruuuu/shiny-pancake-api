@@ -8,4 +8,4 @@ repository: https://github.com/enjiruuuu/shiny-pancake
 guide: https://nordicapis.com/how-to-create-an-api-using-the-flask-framework/
 
 to start virtual server for testing: 
-run ``` flask run ```
+run ```virtualenv venv``` then ``` flask run ```
