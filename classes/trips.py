@@ -1,3 +1,4 @@
+import uuid, json
 from classes.apiConfig import ApiConfig
 from classes.dynamodb import DynamodbAPI
 from flask import request
@@ -23,6 +24,9 @@ class TripsApi:
     
     def addUserTrip(self, item):
         if 'ownerUuid' in item:
+            randomUuid = uuid.uuid4()
+            item['tripUuid'] = str(randomUuid)
+
             queryResponse = self.table.put_item(
                 Item = item
             )
