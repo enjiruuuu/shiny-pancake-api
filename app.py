@@ -45,6 +45,11 @@ def addUserTrip():
     trips = tripsApiInstance.addUserTrip(input_json) #ownerUuid must be in the json
     return trips
 
+@app.route('/trips/<tripUuid>/user/<ownerUuid>/delete', methods=["DELETE"])
+def deleteUserTrip(tripUuid, ownerUuid):
+    response = tripsApiInstance.deleteUserTrip(tripUuid, ownerUuid)
+    return response
+
 # lists
 @app.route('/trips/<tripUuid>/lists', methods=["GET"])
 def getListsByTrips(tripUuid):
