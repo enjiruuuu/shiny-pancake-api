@@ -61,3 +61,36 @@ class TripsApi:
                 "httpStatusCode": self.apiConfigInstance.statusCodes['serverError'],
                 "message": self.apiConfigInstance.responses['generic']['missingKey']
         }
+    
+    def updateUserTrip(self, tripUuid, ownerUuid, item):
+        queryResponse = self.table.get_item(
+            Key={'ownerUuid': ownerUuid, 'tripUuid': tripUuid},
+        )
+
+        if 'Item' in queryResponse:
+            try:
+                query = self.table.update_item(
+                    Key={'ownerUuid': ownerUuid, 'tripUuid': tripUuid},
+                    ExpressionAttributeValues={  #only these 3 attributes are editable
+                        ":title" : item["title"],
+                        ":startDate" : item["startDate"],
+                        ":endDate" : item["endDate"],
+                    },
+                    UpdateExpression="SET title = :title, startDate = :startDate, endDate = :endDate",
+                )
+            except ClientError as e:
+                return {
+                    "httpStatusCode": self.apiConfigInstance.statusCodes['serverError'],
+                    "message": e.response['Error']['message']
+                }
+            else:
+                return {
+                    "httpStatusCode": self.apiConfigInstance.statusCodes['success'],
+                    "data": query
+                }
+        else:
+            return {
+                "httpStatusCode": self.apiConfigInstance.statusCodes['notFound'],
+                "message": self.apiConfigInstance.trips['notFound']
+            }
+        

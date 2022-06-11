@@ -6,3 +6,4 @@ class ApiConfig:
             self.config = json.load(f)
             self.responses = self.config['responses']
             self.statusCodes = self.responses['statusCodes']
+            self.trips = self.responses['trips']
