@@ -45,6 +45,12 @@ def addUserTrip():
     trips = tripsApiInstance.addUserTrip(input_json) #ownerUuid must be in the json
     return trips
 
+@app.route('/trips/<tripUuid>/user/<ownerUuid>/update', methods=["PATCH"])
+def updateUserTrip(tripUuid, ownerUuid):
+    input_json = request.get_json()
+    trips = tripsApiInstance.updateUserTrip(tripUuid, ownerUuid, input_json) #ownerUuid must be in the json
+    return trips
+
 @app.route('/trips/<tripUuid>/user/<ownerUuid>/delete', methods=["DELETE"])
 def deleteUserTrip(tripUuid, ownerUuid):
     response = tripsApiInstance.deleteUserTrip(tripUuid, ownerUuid)

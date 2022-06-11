@@ -19,7 +19,8 @@
             "addedSuccess": "User successfully created"
         },
         "trips": {
-            "addedSuccess": "New trip successfully added"
+            "addedSuccess": "New trip successfully added",
+            "notFound": "Trip does not exist"
         },
         "generic": {
             "serverError": "Something went wrong",
