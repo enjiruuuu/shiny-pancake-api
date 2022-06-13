@@ -39,6 +39,11 @@ def getUserTrips(ownerUuid):
     trips = tripsApiInstance.getAllUserTrips(ownerUuid)
     return trips
 
+@app.route('/users/<ownerUuid>/trips/<tripUuid>', methods=["GET"])
+def getSpecificUserTrip(ownerUuid, tripUuid):
+    trip = tripsApiInstance.getSpecificUserTrip(ownerUuid, tripUuid)
+    return trip
+
 @app.route('/trips/create', methods=["PUT"])
 def addUserTrip():
     input_json = request.get_json()

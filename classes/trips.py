@@ -23,6 +23,26 @@ class TripsApi:
             "data": queryResponse['Items']
         }
     
+    def getSpecificUserTrip(self, ownerUuid: str, tripUuid: str):
+        try:
+            queryResponse = self.table.get_item(Key={'ownerUuid': ownerUuid, 'tripUuid': tripUuid})
+        except ClientError as e:
+            return {
+                "httpStatusCode": self.apiConfigInstance.statusCodes['serverError'],
+                "message": e.response['Error']['message']
+            }
+        else:
+            if 'Item' in queryResponse:
+                return {
+                    "httpStatusCode": self.apiConfigInstance.statusCodes['success'],
+                    "data": queryResponse['Item']
+                }
+            else:
+                return {
+                    "httpStatusCode": self.apiConfigInstance.statusCodes['notFound'],
+                    "message": self.apiConfigInstance.trips['notFound']
+                }
+    
     def deleteUserTrip(self, tripUuid: str, ownerUuid: str):
         try:
             queryResponse = self.table.delete_item(Key={'ownerUuid': ownerUuid, 'tripUuid': tripUuid})
