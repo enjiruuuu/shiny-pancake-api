@@ -22,6 +22,12 @@
             "addedSuccess": "New trip successfully added",
             "notFound": "Trip does not exist"
         },
+        "lists": {
+            "addedSuccess": "New list successfully added"
+        },
+        "itineraries": {
+            "addedSuccess": "New itinerary successfully added"
+        },
         "generic": {
             "serverError": "Something went wrong",
             "missingKey": "Missing mandatory key"

@@ -1,3 +1,4 @@
+import uuid
 from classes.apiConfig import ApiConfig
 from classes.dynamodb import DynamodbAPI
 from boto3.dynamodb.conditions import Key
@@ -41,3 +42,30 @@ class ListsApi:
                 "httpStatusCode": self.apiConfigInstance.statusCodes['success'],
                 "data": queryResponse
             }
+    
+    def addUserList(self, item):
+        #listuuid shld be generated from BE
+        #tripUuid: str, ownerUuid: str, name: str
+        if 'ownerUuid' in item:
+            randomUuid = uuid.uuid4()
+            item['listUuid'] = str(randomUuid) #generate uuid and add it to the json payload
+
+            queryResponse = self.table.put_item(
+                Item = item
+            )
+
+            if queryResponse: 
+                return {
+                    "httpStatusCode": self.apiConfigInstance.statusCodes['success'],
+                    "message": self.apiConfigInstance.responses['lists']['addedSuccess']
+                }
+            
+            return {
+                    "httpStatusCode": self.apiConfigInstance.statusCodes['serverError'],
+                    "message": self.apiConfigInstance.responses['generic']['serverError']
+            }
+        
+        return {
+                "httpStatusCode": self.apiConfigInstance.statusCodes['serverError'],
+                "message": self.apiConfigInstance.responses['generic']['missingKey']
+        }

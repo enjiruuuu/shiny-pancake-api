@@ -1,6 +1,7 @@
 import json
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
+from classes.itineraries import ItinerariesApi
 from classes.users import UsersApi 
 from classes.trips import TripsApi
 from classes.lists import ListsApi
@@ -17,6 +18,7 @@ statusCodes = responses['statusCodes']
 usersApiInstance = UsersApi()
 tripsApiInstance = TripsApi()
 listsApiInstance = ListsApi()
+itinerariesApiInstance = ItinerariesApi()
 
 # login / users
 # TODO: refactor to POST request for security. GET requests are sending password through params and are expected to be cached.
@@ -71,3 +73,21 @@ def getListsByTrips(tripUuid):
 def getListByUuid(tripUuid, listUuid):
     list = listsApiInstance.getListByUuid(tripUuid, listUuid)
     return list
+
+@app.route('/lists/create', methods=["PUT"])
+def addUserList():
+    input_json = request.get_json()
+    lists = listsApiInstance.addUserList(input_json) #ownerUuid must be in the json
+    return lists
+
+#itineraries
+@app.route('/itineraries/create', methods=["PUT"])
+def addItinerary():
+    input_json = request.get_json()
+    itinerary = itinerariesApiInstance.addItinerary(input_json) #ownerUuid must be in the json
+    return itinerary
+
+@app.route('/itineraries/<tripUuid>', methods=["GET"])
+def getItinerary(tripUuid):
+    itinerary = itinerariesApiInstance.getItinerary(tripUuid)
+    return itinerary
